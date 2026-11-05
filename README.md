@@ -2,6 +2,8 @@
 
 # Recap — a Paseo plugin
 
+![Recap: Paseo plugin screen (illustration)](docs/hero.svg)
+
 Adds a Recap button to every agent's composer. Pressing it sends "tldr recap and next steps?" to that agent and asks it to end the answer with "RECAP ↑", so you can catch up on a long chat in one tap.
 
 ![The Recap button, outlined, in an agent's composer](assets/screenshot-recap.png)
