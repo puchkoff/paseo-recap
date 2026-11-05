@@ -1,0 +1,9 @@
+{
+  "id": "paseo-recap",
+  "name": "Recap",
+  "description": "A Recap button in the chat that asks the agent for a TL;DR recap and next steps.",
+  "media": [],
+  "requirements": {
+    "paseo": ">=0.15.2"
+  }
+}
