@@ -3,7 +3,9 @@
   "name": "Recap",
   "description": "A Recap button in the chat that asks the agent for a TL;DR recap and next steps.",
   "icon": "assets/icon.png",
-  "media": [],
+  "media": [
+    "assets/screenshot-recap.png"
+  ],
   "requirements": {
     "paseo": ">=0.15.2"
   }
