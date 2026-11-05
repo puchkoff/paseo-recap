@@ -1,6 +1,6 @@
 import type { PluginButtonRegistration, PluginClientContext } from "@getpaseo/plugin/client";
 
-const PROMPT = "tldr recap and next steps?";
+const PROMPT = "tldr recap and next steps? End your reply with a last line that says exactly: RECAP ↑";
 
 export default function contribute(client: PluginClientContext) {
   const pills = new Map<string, PluginButtonRegistration>();
