@@ -1,6 +1,5 @@
 import type { PluginButtonRegistration, PluginClientContext } from "@getpaseo/plugin/client";
-
-const PROMPT = "tldr recap and next steps?";
+import { RecapPopup } from "./client/recap";
 
 export default function contribute(client: PluginClientContext) {
   const pills = new Map<string, PluginButtonRegistration>();
@@ -19,7 +18,7 @@ export default function contribute(client: PluginClientContext) {
           title: "Ask for a TL;DR recap and next steps",
           label: "Recap",
           icon: "ListChecks",
-          behavior: { kind: "action", onPress: () => client.paseo.agents.ref(agentId).send(PROMPT) },
+          behavior: { kind: "popover", Content: RecapPopup },
         },
       }),
     );
