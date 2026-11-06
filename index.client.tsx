@@ -1,10 +1,16 @@
-import type { PluginButtonRegistration, PluginClientContext } from "@getpaseo/plugin/client";
+import type { PluginButtonRegistration, PluginClientContext, PluginTimelineItemProps } from "@getpaseo/plugin/client";
+import { StreamedText } from "@getpaseo/plugin/client/ui";
+import type { z } from "zod";
+import { recap, recapRow } from "./shared/recap";
 
-const PROMPT = "tldr recap and next steps? End your reply with a last line that says exactly: RECAP ↑";
+function RecapRow({ item, theme }: PluginTimelineItemProps<z.infer<typeof recapRow.schema>>) {
+  return <StreamedText text={item.data.text} phase={item.data.phase} style={{ color: theme.colors.foreground }} />;
+}
 
 export default function contribute(client: PluginClientContext) {
   const pills = new Map<string, PluginButtonRegistration>();
   const lifetime = new AbortController();
+  const removeRenderer = client.addTimelineRenderer({ ...recapRow, Component: RecapRow });
   const register = (agent: { id: string; workspaceId?: string | null }) => {
     // Agents upsert on every status change; an existing pill stays.
     if (lifetime.signal.aborted || !agent.workspaceId || pills.has(agent.id)) return;
@@ -16,10 +22,12 @@ export default function contribute(client: PluginClientContext) {
         workspaceId: agent.workspaceId,
         agentId,
         button: {
-          title: "Ask for a TL;DR recap and next steps",
+          title: "Haiku writes a TL;DR recap and next steps of this chat",
           label: "Recap",
           icon: "ListChecks",
-          behavior: { kind: "action", onPress: () => client.paseo.agents.ref(agentId).send(PROMPT) },
+          behavior: { kind: "action", onPress: async () => {
+            await client.rpc(recap, { agentId });
+          } },
         },
       }),
     );
@@ -52,5 +60,6 @@ export default function contribute(client: PluginClientContext) {
   return () => {
     lifetime.abort();
     removeAll();
+    removeRenderer();
   };
 }
