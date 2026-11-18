@@ -1,10 +1,10 @@
 import type { PluginButtonRegistration, PluginClientContext, PluginTimelineItemProps } from "@getpaseo/plugin/client";
-import { StreamedText } from "@getpaseo/plugin/client/ui";
+import { Markdown } from "@getpaseo/plugin/client/ui";
 import type { z } from "zod";
 import { recap, recapRow } from "./shared/recap";
 
-function RecapRow({ item, theme }: PluginTimelineItemProps<z.infer<typeof recapRow.schema>>) {
-  return <StreamedText text={item.data.text} phase={item.data.phase} style={{ color: theme.colors.foreground }} />;
+function RecapRow({ item }: PluginTimelineItemProps<z.infer<typeof recapRow.schema>>) {
+  return <Markdown>{item.data.text}</Markdown>;
 }
 
 export default function contribute(client: PluginClientContext) {
