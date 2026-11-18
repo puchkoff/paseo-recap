@@ -22,7 +22,7 @@ export default function contribute(client: PluginClientContext) {
         workspaceId: agent.workspaceId,
         agentId,
         button: {
-          title: "Haiku writes a TL;DR recap and next steps of this chat",
+          title: "Where we are and next steps in this chat",
           label: "Recap",
           icon: "ListChecks",
           behavior: { kind: "action", onPress: async () => {

@@ -24,7 +24,7 @@ export async function runRecap({ agentId }: { agentId: string }, { paseo }: Plug
   const id = `recap-${Date.now()}`;
   const show = (text: string, phase: "streaming" | "complete") =>
     source.timeline.append({ type: "plugin", id, kind: recapRow.kind, version: recapRow.version, data: { text, phase } });
-  await show("Haiku is writing a recap…", "streaming");
+  await show("Catching up: where we are and next steps…", "streaming");
 
   const haiku = await paseo.agents.create({
     config: { provider: RECAP_MODEL },
