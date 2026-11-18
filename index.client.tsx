@@ -1,10 +1,6 @@
 import type { PluginButtonRegistration, PluginClientContext } from "@getpaseo/plugin/client";
 
-const PROMPT =
-  "status? what's next? " +
-  // The chat history goes stale: a PR it calls open may be merged by now.
-  "Before answering, check every status claim against its live state (gh pr view, git status/log, running processes) and report the current state, not what the chat last said. " +
-  "Bold the one thing to do next. No intro, no headings. End your reply with a last line that says exactly: RECAP ↑";
+const PROMPT = "status? what's next?";
 
 export default function contribute(client: PluginClientContext) {
   const pills = new Map<string, PluginButtonRegistration>();
