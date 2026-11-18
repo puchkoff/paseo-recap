@@ -3,7 +3,8 @@ import { RECAP_MODEL, recapRow } from "../shared/recap";
 
 const PROMPT =
   "Below is a chat between a user and a coding agent. Answer: where we are and what are next steps. " +
-  "Answer from the transcript only; do not use tools.\n\n<transcript>\n";
+  "The reader has ADHD: at most 5 short bullets, under 80 words total, plain words, bold the one thing to do next. " +
+  "No intro, no headings. Answer from the transcript only; do not use tools.\n\n<transcript>\n";
 // Keeps the prompt well inside Haiku's 200k-token window.
 const MAX_CHARS = 200_000;
 
