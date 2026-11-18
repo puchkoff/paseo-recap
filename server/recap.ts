@@ -2,7 +2,7 @@ import type { PluginHandlerContext } from "@getpaseo/plugin/server";
 import { RECAP_MODEL, recapRow } from "../shared/recap";
 
 const PROMPT =
-  "Below is a chat between a user and a coding agent. Write a TL;DR recap of it and the next steps. " +
+  "Below is a chat between a user and a coding agent. Answer: where we are and what are next steps. " +
   "Answer from the transcript only; do not use tools.\n\n<transcript>\n";
 // Keeps the prompt well inside Haiku's 200k-token window.
 const MAX_CHARS = 200_000;
