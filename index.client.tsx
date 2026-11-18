@@ -1,16 +1,12 @@
-import type { PluginButtonRegistration, PluginClientContext, PluginTimelineItemProps } from "@getpaseo/plugin/client";
-import { Markdown } from "@getpaseo/plugin/client/ui";
-import type { z } from "zod";
-import { recap, recapRow } from "./shared/recap";
+import type { PluginButtonRegistration, PluginClientContext } from "@getpaseo/plugin/client";
 
-function RecapRow({ item }: PluginTimelineItemProps<z.infer<typeof recapRow.schema>>) {
-  return <Markdown>{item.data.text}</Markdown>;
-}
+const PROMPT =
+  "tldr: where we are and next steps? At most 5 short bullets, under 80 words, plain words, " +
+  "bold the one thing to do next. No intro, no headings. End your reply with a last line that says exactly: RECAP ↑";
 
 export default function contribute(client: PluginClientContext) {
   const pills = new Map<string, PluginButtonRegistration>();
   const lifetime = new AbortController();
-  const removeRenderer = client.addTimelineRenderer({ ...recapRow, Component: RecapRow });
   const register = (agent: { id: string; workspaceId?: string | null }) => {
     // Agents upsert on every status change; an existing pill stays.
     if (lifetime.signal.aborted || !agent.workspaceId || pills.has(agent.id)) return;
@@ -22,12 +18,10 @@ export default function contribute(client: PluginClientContext) {
         workspaceId: agent.workspaceId,
         agentId,
         button: {
-          title: "Where we are and next steps in this chat",
+          title: "Ask for a TL;DR recap and next steps",
           label: "Recap",
           icon: "ListChecks",
-          behavior: { kind: "action", onPress: async () => {
-            await client.rpc(recap, { agentId });
-          } },
+          behavior: { kind: "action", onPress: () => client.paseo.agents.ref(agentId).send(PROMPT) },
         },
       }),
     );
@@ -60,6 +54,5 @@ export default function contribute(client: PluginClientContext) {
   return () => {
     lifetime.abort();
     removeAll();
-    removeRenderer();
   };
 }
