@@ -1,8 +1,8 @@
 import type { PluginButtonRegistration, PluginClientContext } from "@getpaseo/plugin/client";
 
 const PROMPT =
-  "tldr: where we are and next steps? At most 5 short bullets, under 80 words, plain words, " +
-  "bold the one thing to do next. No intro, no headings. End your reply with a last line that says exactly: RECAP ↑";
+  "tldr: where we are and next steps? " +
+  "Bold the one thing to do next. No intro, no headings. End your reply with a last line that says exactly: RECAP ↑";
 
 export default function contribute(client: PluginClientContext) {
   const pills = new Map<string, PluginButtonRegistration>();
