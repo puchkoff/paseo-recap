@@ -4,7 +4,7 @@
 
 ![Recap: Paseo plugin screen (illustration)](docs/hero.svg)
 
-Adds a Recap button to every agent's composer. Pressing it sends "status? what's next?" to that agent, so you can catch up on a long chat in one tap.
+Adds a Recap button to every agent's composer. Pressing it sends "status? what's next? tldr" to that agent, so you can catch up on a long chat in one tap.
 
 ![The Recap button, outlined, in an agent's composer](assets/screenshot-recap.png)
 
