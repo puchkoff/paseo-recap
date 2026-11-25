@@ -1,6 +1,6 @@
 import type { PluginButtonRegistration, PluginClientContext } from "@getpaseo/plugin/client";
 
-const PROMPT = "status? what's next? tldr";
+const PROMPT = "status? what's next? tldr. also remind me in one line what my first prompt in this session was.";
 
 export default function contribute(client: PluginClientContext) {
   const pills = new Map<string, PluginButtonRegistration>();
